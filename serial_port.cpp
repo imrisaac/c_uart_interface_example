@@ -211,8 +211,7 @@ write_message(const mavlink_message_t &message)
  * throws EXIT_FAILURE if could not open the port
  */
 void
-Serial_Port::
-open_serial()
+Serial_Port::open_serial()
 {
 
 	// --------------------------------------------------------------------------
@@ -289,9 +288,7 @@ close_serial()
 // ------------------------------------------------------------------------------
 //   Convenience Functions
 // ------------------------------------------------------------------------------
-void
-Serial_Port::
-start()
+void Serial_Port::start()
 {
 	open_serial();
 }

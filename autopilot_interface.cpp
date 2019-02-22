@@ -230,9 +230,7 @@ update_setpoint(mavlink_set_position_target_local_ned_t setpoint)
 // ------------------------------------------------------------------------------
 //   Read Messages
 // ------------------------------------------------------------------------------
-void
-Autopilot_Interface::
-read_messages()
+void Autopilot_Interface:: read_messages()
 {
 	bool success;               // receive success flag
 	bool received_all = false;  // receive only one message
@@ -351,6 +349,10 @@ read_messages()
 					this_timestamps.attitude = current_messages.time_stamps.attitude;
 					break;
 				}
+
+				case MAVLINK_MSG_ID_MANUAL_CONTROL:
+				{
+
 
 				default:
 				{
