@@ -293,9 +293,7 @@ void Serial_Port::start()
 	open_serial();
 }
 
-void
-Serial_Port::
-stop()
+void Serial_Port::stop()
 {
 	close_serial();
 }
@@ -304,9 +302,7 @@ stop()
 // ------------------------------------------------------------------------------
 //   Quit Handler
 // ------------------------------------------------------------------------------
-void
-Serial_Port::
-handle_quit( int sig )
+void Serial_Port::handle_quit( int sig )
 {
 	try {
 		stop();
@@ -321,9 +317,7 @@ handle_quit( int sig )
 //   Helper Function - Open Serial Port File Descriptor
 // ------------------------------------------------------------------------------
 // Where the actual port opening happens, returns file descriptor 'fd'
-int
-Serial_Port::
-_open_port(const char* port)
+int Serial_Port::_open_port(const char* port)
 {
 	// Open serial port
 	// O_RDWR - Read and write
@@ -351,9 +345,7 @@ _open_port(const char* port)
 //   Helper Function - Setup Serial Port
 // ------------------------------------------------------------------------------
 // Sets configuration, flags, and baud rate
-bool
-Serial_Port::
-_setup_port(int baud, int data_bits, int stop_bits, bool parity, bool hardware_control)
+bool Serial_Port::_setup_port(int baud, int data_bits, int stop_bits, bool parity, bool hardware_control)
 {
 	// Check file descriptor
 	if(!isatty(fd))
@@ -497,9 +489,7 @@ _setup_port(int baud, int data_bits, int stop_bits, bool parity, bool hardware_c
 // ------------------------------------------------------------------------------
 //   Read Port with Lock
 // ------------------------------------------------------------------------------
-int
-Serial_Port::
-_read_port(uint8_t &cp)
+int Serial_Port::_read_port(uint8_t &cp)
 {
 
 	// Lock
@@ -517,9 +507,7 @@ _read_port(uint8_t &cp)
 // ------------------------------------------------------------------------------
 //   Write Port with Lock
 // ------------------------------------------------------------------------------
-int
-Serial_Port::
-_write_port(char *buf, unsigned len)
+int Serial_Port::_write_port(char *buf, unsigned len)
 {
 
 	// Lock

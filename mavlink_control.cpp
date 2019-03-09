@@ -139,7 +139,7 @@ int top (int argc, char **argv)
 	/*
 	 * Now we can implement the algorithm we want on top of the autopilot interface
 	 */
-	commands(autopilot_interface);
+	//commands(autopilot_interface);
 
 
 	// --------------------------------------------------------------------------
@@ -152,20 +152,11 @@ int top (int argc, char **argv)
 	autopilot_interface.stop();
 	serial_port.stop();
 
-
-	// --------------------------------------------------------------------------
-	//   DONE
-	// --------------------------------------------------------------------------
-
 	// woot!
 	return 0;
 
 }
 
-
-// ------------------------------------------------------------------------------
-//   COMMANDS
-// ------------------------------------------------------------------------------
 
 void commands(Autopilot_Interface &api)
 {
