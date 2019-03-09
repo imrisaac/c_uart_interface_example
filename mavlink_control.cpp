@@ -62,10 +62,6 @@
 int top (int argc, char **argv)
 {
 
-	// --------------------------------------------------------------------------
-	//   PARSE THE COMMANDS
-	// --------------------------------------------------------------------------
-
 	// Default input arguments
 #ifdef __APPLE__
 	char *uart_name = (char*)"/dev/tty.usbmodem1";
@@ -76,11 +72,6 @@ int top (int argc, char **argv)
 
 	// do the parse, will throw an int if it fails
 	parse_commandline(argc, argv, uart_name, baudrate);
-
-
-	// --------------------------------------------------------------------------
-	//   PORT and THREAD STARTUP
-	// --------------------------------------------------------------------------
 
 	/*
 	 * Instantiate a serial port object
@@ -124,31 +115,13 @@ int top (int argc, char **argv)
 	autopilot_interface_quit = &autopilot_interface;
 	signal(SIGINT,quit_handler);
 
-	/*
-	 * Start the port and autopilot_interface
-	 * This is where the port is opened, and read and write threads are started.
-	 */
+	// open serial port
 	serial_port.start();
+
+	// start read and write threads
 	autopilot_interface.start();
 
-
-	// --------------------------------------------------------------------------
-	//   RUN COMMANDS
-	// --------------------------------------------------------------------------
-
-	/*
-	 * Now we can implement the algorithm we want on top of the autopilot interface
-	 */
-	//commands(autopilot_interface);
-
-
-	// --------------------------------------------------------------------------
-	//   THREAD and PORT SHUTDOWN
-	// --------------------------------------------------------------------------
-
-	/*
-	 * Now that we are done we can stop the threads and close the port
-	 */
+	// all done stop threads close ports
 	autopilot_interface.stop();
 	serial_port.stop();
 
@@ -160,9 +133,7 @@ int top (int argc, char **argv)
 
 void commands(Autopilot_Interface &api)
 {
-
 	return;
-
 }
 
 

@@ -51,10 +51,6 @@
 #ifndef AUTOPILOT_INTERFACE_H_
 #define AUTOPILOT_INTERFACE_H_
 
-// ------------------------------------------------------------------------------
-//   Includes
-// ------------------------------------------------------------------------------
-
 #include "serial_port.h"
 
 #include <signal.h>
@@ -62,10 +58,6 @@
 #include <sys/time.h>
 
 #include <common/mavlink.h>
-
-// ------------------------------------------------------------------------------
-//   Defines
-// ------------------------------------------------------------------------------
 
 /**
  * Defines for mavlink_set_position_target_local_ned_t.type_mask
@@ -78,27 +70,6 @@
  * If bit 10 is set the floats afx afy afz should be interpreted as force
  * instead of acceleration.
  *
- * Mapping:
- * bit 1: x,
- * bit 2: y,
- * bit 3: z,
- * bit 4: vx,
- * bit 5: vy,
- * bit 6: vz,
- * bit 7: ax,
- * bit 8: ay,
- * bit 9: az,
- * bit 10: is force setpoint,
- * bit 11: yaw,
- * bit 12: yaw rate
- * remaining bits unused
- *
- * Combine bitmasks with bitwise &
- *
- * Example for position and yaw angle:
- * uint16_t type_mask =
- *     MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_POSITION &
- *     MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_YAW_ANGLE;
  */
 
                                                 // bit number  876543210987654321
