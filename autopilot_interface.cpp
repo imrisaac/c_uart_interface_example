@@ -2,8 +2,7 @@
 
 #define VariableName(name) #name
 
-uint64_t
-get_time_usec()
+uint64_t get_time_usec()
 {
 	static struct timeval _time_stamp;
 	gettimeofday(&_time_stamp, NULL);
@@ -209,8 +208,7 @@ void Autopilot_Interface::read_messages()
 // ------------------------------------------------------------------------------
 //   Write Message
 // ------------------------------------------------------------------------------
-int Autopilot_Interface::
-	write_message(mavlink_message_t message)
+int Autopilot_Interface::write_message(mavlink_message_t message)
 {
 	// do the write
 	int len = serial_port->write_message(message);
@@ -225,8 +223,7 @@ int Autopilot_Interface::
 // ------------------------------------------------------------------------------
 //   Write Setpoint Message
 // ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	write_setpoint()
+void Autopilot_Interface::write_setpoint()
 {
 	// --------------------------------------------------------------------------
 	//   PACK PAYLOAD
@@ -267,8 +264,7 @@ void Autopilot_Interface::
 // ------------------------------------------------------------------------------
 //   Start Off-Board Mode
 // ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	enable_offboard_control()
+void Autopilot_Interface::enable_offboard_control()
 {
 	// Should only send this command once
 	if (control_status == false)
@@ -299,8 +295,7 @@ void Autopilot_Interface::
 // ------------------------------------------------------------------------------
 //   Stop Off-Board Mode
 // ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	disable_offboard_control()
+void Autopilot_Interface::disable_offboard_control()
 {
 
 	// Should only send this command once
@@ -332,8 +327,7 @@ void Autopilot_Interface::
 // ------------------------------------------------------------------------------
 //   Toggle Off-Board Mode
 // ------------------------------------------------------------------------------
-int Autopilot_Interface::
-	toggle_offboard_control(bool flag)
+int Autopilot_Interface::oggle_offboard_control(bool flag)
 {
 	// Prepare command for off-board mode
 	mavlink_command_long_t com = {0};
@@ -357,8 +351,7 @@ int Autopilot_Interface::
 // ------------------------------------------------------------------------------
 //   STARTUP
 // ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	start()
+void Autopilot_Interface::start()
 {
 	int result;
 
@@ -477,11 +470,11 @@ void Autopilot_Interface::
 	return;
 }
 
-// ------------------------------------------------------------------------------
-//   SHUTDOWN
-// ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	stop()
+/*
+	stop
+	stop the read and write threads
+*/	
+void Autopilot_Interface::stop()
 {
 	// --------------------------------------------------------------------------
 	//   CLOSE THREADS
@@ -501,11 +494,11 @@ void Autopilot_Interface::
 	// still need to close the serial_port separately
 }
 
-// ------------------------------------------------------------------------------
-//   Read Thread
-// ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	start_read_thread()
+/*
+	start_read_thread
+	start the read port read thread
+*/
+void Autopilot_Interface::start_read_thread()
 {
 
 	if (reading_status != 0)
@@ -520,11 +513,10 @@ void Autopilot_Interface::
 	}
 }
 
-// ------------------------------------------------------------------------------
-//   Write Thread
-// ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	start_write_thread(void)
+/*
+	start_write_thread
+*/
+void Autopilot_Interface::start_write_thread(void)
 {
 	if (not writing_status == false)
 	{
@@ -539,11 +531,11 @@ void Autopilot_Interface::
 	}
 }
 
-// ------------------------------------------------------------------------------
-//   Quit Handler
-// ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	handle_quit(int sig)
+/*
+	handle_quit
+	handle ctl-c
+*/
+void Autopilot_Interface::handle_quit(int sig)
 {
 
 	disable_offboard_control();
@@ -558,11 +550,10 @@ void Autopilot_Interface::
 	}
 }
 
-// ------------------------------------------------------------------------------
-//   Read Thread
-// ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	read_thread()
+/*
+	Read thread
+*/
+void Autopilot_Interface::read_thread()
 {
 	reading_status = true;
 
@@ -577,11 +568,10 @@ void Autopilot_Interface::
 	return;
 }
 
-// ------------------------------------------------------------------------------
-//   Write Thread
-// ------------------------------------------------------------------------------
-void Autopilot_Interface::
-	write_thread(void)
+/*
+	Write thread
+*/
+void Autopilot_Interface::write_thread(void)
 {
 	// signal startup
 	writing_status = 2;
@@ -623,8 +613,7 @@ void Autopilot_Interface::
 //  Pthread Starter Helper Functions
 // ------------------------------------------------------------------------------
 
-void *
-start_autopilot_interface_read_thread(void *args)
+void * start_autopilot_interface_read_thread(void *args)
 {
 	// takes an autopilot object argument
 	Autopilot_Interface *autopilot_interface = (Autopilot_Interface *)args;
@@ -636,8 +625,7 @@ start_autopilot_interface_read_thread(void *args)
 	return NULL;
 }
 
-void *
-start_autopilot_interface_write_thread(void *args)
+void * start_autopilot_interface_write_thread(void *args)
 {
 	// takes an autopilot object argument
 	Autopilot_Interface *autopilot_interface = (Autopilot_Interface *)args;
